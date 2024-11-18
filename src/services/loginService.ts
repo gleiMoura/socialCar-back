@@ -11,7 +11,7 @@ const signinUser = async (credentials: loginType) => {
 
     const confirmPassword = user && bcrypt.compareSync(password, user.password);
 
-    if (!user || confirmPassword) {
+    if (!user || !confirmPassword) {
         throw {
             response: {
                 message: "Usuário ou senha incorretos!",
