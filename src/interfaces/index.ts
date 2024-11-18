@@ -8,3 +8,10 @@ export interface registerType {
     email: string,
     password: string
 };
+
+export interface CustomError extends Error {
+    response?: {
+        status: number;
+        message: string;
+    };
+}

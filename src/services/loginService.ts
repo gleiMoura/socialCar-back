@@ -1,5 +1,5 @@
 import { loginType } from "interfaces";
-import { findUser, startSession } from "repository/loginRepository";
+import { findUser, startSession } from "../repository/loginRepository";
 import { v4 as uuid } from "uuid";
 import bcrypt from "bcrypt";
 

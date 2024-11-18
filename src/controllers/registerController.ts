@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { logUser } from "services/registerService";
+import { logUser } from "../services/registerService";
 
 export const doRegister = async (req: Request, res: Response) => {
     const credentials = req.body;

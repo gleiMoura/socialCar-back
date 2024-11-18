@@ -1,12 +1,11 @@
 {
   "name": "socialcar",
-  "type": "module",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/src/index.js",
+    "start": "node dist/index.js",
     "dev": "tsx watch src/index.ts",
     "unit:test": "dotenv -e .env.test jest -- -i --testPathPattern=tests/unit",
     "integration:test": "dotenv -e .env.test jest -- -i --testPathPattern=tests/integration"

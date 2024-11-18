@@ -1,23 +1,20 @@
-import { MongoClient, GridFSBucket } from "mongodb";
+import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 import chalk from "chalk";
 
-dotenv.config();
+dotenv.config()
 
-const Client = new MongoClient(process.env.MONGO_URL);
+const Client = process.env.MONGO_URL + '?ssl=true&tlsAllowInvalidCertificates=true';
 
 async function init() {
-  try {
-    await Client.connect();
-    console.log(chalk.green("Database is connected!"));
+  const mongoClient = new MongoClient(Client);
+  await mongoClient.connect();
+  console.log(chalk.green("Database is connected!"));
+  const database = mongoClient.db(process.env.DATABASE);
 
-    const db = Client.db(process.env.DATABASE);
+  return database;
+}
 
-    return { db }
-  } catch (error) {
-    console.error(chalk.red("Erro ao conectar com o MongoDB:"), error);
-    throw error;
-  }
-};
+const db = init();
 
-export default await init();
+export default db;

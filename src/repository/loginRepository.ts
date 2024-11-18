@@ -1,10 +1,9 @@
-import config from "config"
+import database from "../config"
 import { ObjectId } from "mongodb";
-
-const { db } = config;
 
 const findUser = async (email: string) => {
     try {
+        const db = await database;
         const user = await db.collection('users').findOne({ email });
 
         return user;
@@ -15,6 +14,7 @@ const findUser = async (email: string) => {
 
 const startSession = async (userId: ObjectId, token: string) => {
     try {
+        const db = await database;
         await db.collection("sessions").insertOne({
             userId, token
         })
