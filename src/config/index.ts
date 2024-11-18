@@ -11,7 +11,7 @@ async function init() {
     await Client.connect();
     console.log(chalk.green("Database is connected!"));
 
-    const db = Client.db(process.env.BANCO);
+    const db = Client.db(process.env.DATABASE);
 
     return { db }
   } catch (error) {
