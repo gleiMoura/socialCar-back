@@ -1,4 +1,3 @@
-import db from "config";
 import { Request, Response } from "express";
 import signinUser from "services/loginService";
 
