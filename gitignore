@@ -1,0 +1,5 @@
+node_modules
+covarage/
+.env
+.env.test
+dist
