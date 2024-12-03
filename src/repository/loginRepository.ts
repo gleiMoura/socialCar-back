@@ -12,6 +12,17 @@ const findUser = async (email: string) => {
     }
 };
 
+const findUserBySession = async (token: string) => {
+    try {
+        const db = await database;
+        const user = await db.collection('sessions').findOne({ token });
+
+        return user;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 const startSession = async (userId: ObjectId, token: string) => {
     try {
         const db = await database;
@@ -25,5 +36,6 @@ const startSession = async (userId: ObjectId, token: string) => {
 
 export {
     findUser,
-    startSession
+    startSession,
+    findUserBySession
 }
