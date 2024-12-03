@@ -5,6 +5,7 @@ export interface loginType {
 
 export interface registerType {
     name: string,
+    profileUrl?: string,
     email: string,
     password: string
 };
