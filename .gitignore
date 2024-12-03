@@ -3,3 +3,4 @@ covarage/
 .env
 .env.test
 dist
+src/credentials.json
