@@ -28,6 +28,7 @@ const signinUser = async (credentials: loginType) => {
 
         const userInformation = {
             name: user.name,
+            profileUrl: "",
             email,
             token
         };
