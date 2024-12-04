@@ -1,7 +1,7 @@
-import { registerType } from "interfaces";
+import { registerType } from "interfaces/index.js";
 import bcrypt from "bcrypt";
-import { findUser, findUserBySession } from "../repository/loginRepository";
-import { logUserInDb, updateUserInDb } from "../repository/registerRepository";
+import { findUser, findUserBySession } from "../repository/loginRepository.js";
+import { logUserInDb, updateUserInDb } from "../repository/registerRepository.js";
 
 export const logUser = async (credentials: registerType) => {
     const { password, email } = credentials;

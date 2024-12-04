@@ -1,7 +1,7 @@
-import { generateProfileLink } from "repository/filesRepository";
 import { Request, Response } from "express";
+import { generateProfileLink } from "../repository/filesRepository.js";
+import { logUser, logUserWithProfileLink } from "../services/registerService.js";
 
-import { logUser, logUserWithProfileLink } from "../services/registerService";
 
 export const doRegister = async (req: Request, res: Response) => {
     const credentials = req.body;

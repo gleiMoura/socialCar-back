@@ -1,5 +1,5 @@
-import { loginType } from "interfaces";
-import { findUser, startSession } from "../repository/loginRepository";
+import { loginType } from "interfaces/index.js";
+import { findUser, startSession } from "../repository/loginRepository.js";
 import { v4 as uuid } from "uuid";
 import bcrypt from "bcrypt";
 

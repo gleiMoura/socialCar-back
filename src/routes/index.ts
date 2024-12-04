@@ -1,6 +1,6 @@
 import Router from "express";
-import loginRouter from "./loginRouter";
-import registerRouter from "./registerRouter";
+import loginRouter from "./loginRouter.js";
+import registerRouter from "./registerRouter.js";
 
 const router = Router();
 router.use(loginRouter)

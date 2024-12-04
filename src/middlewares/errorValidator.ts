@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
-import { CustomError } from "interfaces";
+import { CustomError } from "interfaces/index.js";
 
 async function errorHandler(error: CustomError, req: Request, res: Response, next: NextFunction) {
     if (error.response) {

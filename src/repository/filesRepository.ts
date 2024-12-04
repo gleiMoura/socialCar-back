@@ -1,4 +1,4 @@
-import { bucket, bucketName } from "config/cloud";
+import { bucket, bucketName } from "../config/cloud.js";
 
 export const generateProfileLink = async (file) => {
     try {

@@ -1,4 +1,4 @@
-import { registerType } from "interfaces";
+import { registerType } from "interfaces/index.js";
 import joi, { ObjectSchema } from "joi";
 
 const registerSchema: ObjectSchema<registerType> = joi.object({

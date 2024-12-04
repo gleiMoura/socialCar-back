@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import signinUser from "../services/loginService";
+import signinUser from "../services/loginService.js";
 
 export const doLogin = async (req: Request, res: Response) => {
     const credentials = req.body;

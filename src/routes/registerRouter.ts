@@ -1,7 +1,7 @@
-import { doRegister, insertProfileImage } from "../controllers/registerController";
+import { doRegister, insertProfileImage } from "../controllers/registerController.js";
 import { Router } from "express";
-import schemaValidator from "../middlewares/schemaValidator";
-import registerSchema from "../schemas/registerSchema";
+import schemaValidator from "../middlewares/schemaValidator.js";
+import registerSchema from "../schemas/registerSchema.js";
 import multer from "multer"
 
 const upload = multer({ dest: 'uploads/' });
