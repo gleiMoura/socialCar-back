@@ -14,13 +14,14 @@ export const doRegister = async (req: Request, res: Response) => {
 
 export const insertProfileImage = async (req: Request, res: Response) => {
     const file = req.file;
-    const token = req.body.token;
-
-    console.log("token", token)
+    const authHeader = req.headers.authorization;
+    const token = authHeader.split(' ')[1];
 
     const profileLink = await generateProfileLink(file);
+    console.log("profileLink:", profileLink)
 
     const profile = await logUserWithProfileLink(token, profileLink);
+    console.log("profile", profile)
 
     res.status(201).send(profile);
 };
