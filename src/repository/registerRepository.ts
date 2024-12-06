@@ -10,16 +10,16 @@ export const logUserInDb = async (credentials: registerType) => {
     }
 };
 
-export const updateUserInDb = async (email: string, profileLink: string) => {
+export const updateUserInDb = async (userId: string, profileLink: string) => {
     try {
         const db = await database;
-        const result = await db.collection('users').updateOne({ email }, { $set: { profileLink } })
+        const result = await db.collection('users').updateOne(
+            { userId },
+            { $set: { profileLink } },
+            { writeConcern: { w: 1 } }
+        );
 
-        if (result.matchedCount > 0) {
-            console.log("Documento atualizado com sucesso!")
-        } else {
-            console.log("Nenhum documento encontrado")
-        }
+        return result
     } catch (error) {
         console.log("Error trying log user in db", error);
     }
