@@ -23,9 +23,9 @@ export const logUser = async (credentials: registerType) => {
 };
 
 export const logUserWithProfileLink = async (token: string, profileLink: string) => {
-    const user = await findUserBySession(token);
+    const session = await findUserBySession(token);
 
-    if (!user) {
+    if (!session) {
         throw {
             response: {
                 status: 404,
@@ -34,10 +34,15 @@ export const logUserWithProfileLink = async (token: string, profileLink: string)
         }
     };
 
-    const email = user.email;
+    const userId = session.userId;
 
-    const credentials = await updateUserInDb(email, profileLink);
+    const result = await updateUserInDb(userId, profileLink);
 
-    return credentials
+    if (result) {
+        return ({
+            token,
+            profileLink
+        });
+    };
 };
 
