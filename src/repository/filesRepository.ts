@@ -14,7 +14,8 @@ export const generateProfileLink = async (file) => {
 
         // Verificar se o arquivo já está em processo de upload
         if (uploadInProgress.has(fileName)) {
-            throw new Error('Upload já está em progresso para esse arquivo.');
+            console.log('Upload já está em progresso para esse arquivo.');
+            return;
         }
 
         // Adiciona o arquivo ao conjunto de uploads em progresso
