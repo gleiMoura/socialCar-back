@@ -11,11 +11,25 @@ const questionSchema = joi.object({
     options: optionSchema.required(),
 });
 
+const rightOptionsSchema = joi.object({
+    firstQuestion: joi.string().required(),
+    secondQuestion: joi.string().optional(),
+    thirdQuestion: joi.string().optional(),
+});
+
+const answersSchema = joi.object({
+    oneRight: joi.string().required(),
+    twoRight: joi.string().optional(),
+    threeRight: joi.string().optional(),
+});
+
 const quizzSchema: ObjectSchema = joi.object({
     title: joi.string().required(),
-    firtQuestion: questionSchema.required(),
+    firstQuestion: questionSchema.required(),
     secondQuestion: questionSchema.optional(),
     thirdQuestion: questionSchema.optional(),
+    rightOptions: rightOptionsSchema.required(),
+    answers: answersSchema.required(),
 });
 
 export default quizzSchema;
