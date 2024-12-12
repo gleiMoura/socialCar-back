@@ -15,4 +15,34 @@ export interface CustomError extends Error {
         status: number;
         message: string;
     };
+};
+
+export interface Options {
+    option1: string;
+    option2?: string;
+    option3?: string;
+};
+
+interface Question {
+    title: string;
+    options: Options;
+};
+
+interface RightOptions {
+    firstQuestion: string;
+    secondQuestion?: string;
+    thirdQuestion?: string;
+}
+interface Answers {
+    oneRight: string;
+    twoRight?: string;
+    threeRight?: string;
+}
+export interface QuizzType {
+    title: string;
+    firstQuestion: Question;
+    secondQuestion?: Question;
+    thirdQuestion?: Question;
+    rightOptions: RightOptions;
+    answers: Answers;
 }
