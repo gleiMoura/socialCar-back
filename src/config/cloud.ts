@@ -17,8 +17,6 @@ const credentials = {
     universe_domain: process.env.GOOGLE_UNIVERSE_DOMAIN
 };
 
-console.log(credentials)
-
 const storage = new Storage({
     projectId: 'socialcar-442819',
     credentials: credentials
