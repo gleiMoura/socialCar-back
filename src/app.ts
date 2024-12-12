@@ -6,9 +6,6 @@ import errorHandler from "./middlewares/errorValidator.js";;
 
 const app = express();
 
-/* app.use(cors({
-    origin: ""
-})); */
 app.use(cors());
 app.use(json());
 app.use(router);
