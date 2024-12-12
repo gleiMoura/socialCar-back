@@ -4,7 +4,7 @@ import chalk from "chalk";
 
 dotenv.config()
 
-const Client = process.env.MONGO_URL + '?ssl=true&tlsAllowInvalidCertificates=true';
+const Client = process.env.MONGO_URL + '&ssl=true&tlsAllowInvalidCertificates=true';
 
 async function init() {
   const mongoClient = new MongoClient(Client);
