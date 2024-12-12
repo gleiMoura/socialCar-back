@@ -19,7 +19,7 @@ export const updateUserInDb = async (userId: string, profileLink: string) => {
             { writeConcern: { w: 1 } }
         );
 
-        return result
+        return result;
     } catch (error) {
         console.log("Error trying log user in db", error);
     }
