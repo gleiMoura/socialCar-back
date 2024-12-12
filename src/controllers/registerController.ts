@@ -18,10 +18,8 @@ export const insertProfileImage = async (req: Request, res: Response) => {
     const token = authHeader.split(' ')[1];
 
     const profileLink = await generateProfileLink(file);
-    console.log("profileLink:", profileLink)
 
     const profile = await logUserWithProfileLink(token, profileLink);
-    console.log("profile", profile)
 
     res.status(201).send(profile);
 };
