@@ -32,4 +32,14 @@ export const getUserQuizzesFromDb = async (userId: string) => {
         console.log("Error trying to save quizz", error);
         throw error
     }
+};
+
+export const deleteQuizzInDb = async (id: string) => {
+    try {
+        const db = await database;
+        await db.collection('quizz').deleteOne({ id });
+    } catch (error) {
+        console.log("Error trying to save quizz", error);
+        throw error
+    }
 }
