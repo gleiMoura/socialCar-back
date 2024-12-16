@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { QuizzType } from "interfaces";
-import { getAllQuizzes, createQuizz } from "services/quizzService";
+import { getAllQuizzes, createQuizz, getUserQuizzes } from "services/quizzService";
 
 export const doQuizz = async (req: Request, res: Response) => {
     const quizz: QuizzType = req.body;
@@ -16,5 +16,14 @@ export const sendAllQuizzes = async (req: Request, res: Response) => {
     const allQuizzes = await getAllQuizzes();
 
     res.send(allQuizzes).status(201);
+};
+
+export const sendUserQuizzes = async (req: Request, res: Response) => {
+    const authHeader = req.headers.authorization;
+    const token = authHeader.split(' ')[1];
+
+    const userQuizzes = await getUserQuizzes(token);
+
+    res.send(userQuizzes).status(201);
 };
 
