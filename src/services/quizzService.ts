@@ -1,6 +1,6 @@
 import { QuizzType } from "interfaces/index.js";
 import { findUserBySession } from "../repository/loginRepository.js";
-import { getQuizzesFromDb, saveQuizzInDb } from "repository/quizzRepository.js";
+import { getQuizzesFromDb, getUserQuizzesFromDb, saveQuizzInDb } from "repository/quizzRepository.js";
 
 export const createQuizz = async (quizz: QuizzType, token: string) => {
     const session = await findUserBySession(token);
@@ -37,6 +37,34 @@ export const createQuizz = async (quizz: QuizzType, token: string) => {
 
 export const getAllQuizzes = async () => {
     const quizzes = await getQuizzesFromDb();
+
+    if (!quizzes) {
+        throw {
+            response: {
+                status: 404,
+                message: "Problem to find quizzes!"
+            }
+        }
+    };
+
+    return quizzes;
+};
+
+export const getUserQuizzes = async (token: string) => {
+    const session = await findUserBySession(token);
+
+    if (!session) {
+        throw {
+            response: {
+                status: 404,
+                message: "User is not loged in system!"
+            }
+        }
+    };
+
+    const userId = session.userId;
+
+    const quizzes = await getUserQuizzesFromDb(userId);
 
     if (!quizzes) {
         throw {
