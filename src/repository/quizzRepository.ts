@@ -21,4 +21,15 @@ export const getQuizzesFromDb = async () => {
         console.log("Error trying to save quizz", error);
         throw error
     }
+};
+
+export const getUserQuizzesFromDb = async (userId: string) => {
+    try {
+        const db = await database;
+        const result = await db.collection('quizz').find({ userId }).toArray();
+        return result;
+    } catch (error) {
+        console.log("Error trying to save quizz", error);
+        throw error
+    }
 }
