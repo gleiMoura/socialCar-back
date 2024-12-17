@@ -1,4 +1,4 @@
-import { savePostInDb } from "../repository/postRepository.js";
+import { getPostsFromDb, getUserPostsFromDb, savePostInDb } from "../repository/postRepository.js";
 import { findUserBySession } from "../repository/loginRepository.js";
 
 export const createPost = async (caption: string, token: string, photo: string) => {
@@ -33,4 +33,47 @@ export const createPost = async (caption: string, token: string, photo: string) 
             }
         }
     }
+};
+
+export const getAllPosts = async () => {
+    const posts = await getPostsFromDb();
+
+    if (!posts) {
+        throw {
+            response: {
+                status: 404,
+                message: "Problem to find posts!"
+            }
+        }
+    };
+
+    return posts;
+};
+
+export const getUserPosts = async (token: string) => {
+    const session = await findUserBySession(token);
+
+    if (!session) {
+        throw {
+            response: {
+                status: 404,
+                message: "User is not loged in system!"
+            }
+        }
+    };
+
+    const userId = session.userId;
+
+    const posts = await getUserPostsFromDb(userId);
+
+    if (!posts) {
+        throw {
+            response: {
+                status: 404,
+                message: "Problem to find posts!"
+            }
+        }
+    };
+
+    return posts;
 };
