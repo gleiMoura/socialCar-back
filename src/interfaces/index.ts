@@ -45,4 +45,10 @@ export interface QuizzType {
     thirdQuestion?: Question;
     rightOptions: RightOptions;
     answers: Answers;
+};
+
+export interface PostType {
+    userId: string,
+    caption: string;
+    photo: string
 }
