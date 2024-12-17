@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { PostType } from "interfaces";
-import { generateProfileLink } from "repository/filesRepository";
-import { createPost, getAllPosts, getUserPosts } from "services/postService";
+import { PostType } from "../interfaces/index.js";
+import { generateProfileLink } from "../repository/filesRepository.js";
+import { createPost, getAllPosts, getUserPosts } from "../services/postService.js";
 
 export const savePost = async (req: Request, res: Response) => {
     const file = req.file;

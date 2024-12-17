@@ -1,6 +1,6 @@
 import { Router } from "express";
+import multer from "multer";
 import { savePost, sendAllPosts, sendUserPosts } from "../controllers/postController.js";
-import multer from "multer"
 
 const upload = multer({ dest: 'uploads/' });
 

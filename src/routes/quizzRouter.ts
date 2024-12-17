@@ -1,5 +1,5 @@
-import { deleteQuizz, doQuizz, sendAllQuizzes, sendUserQuizzes } from "../controllers/quizzController.js";
 import { Router } from "express";
+import { deleteQuizz, doQuizz, sendAllQuizzes, sendUserQuizzes } from "../controllers/quizzController.js";
 import schemaValidator from "../middlewares/schemaValidator.js";
 import quizzSchema from "../schemas/quizSchema.js";
 

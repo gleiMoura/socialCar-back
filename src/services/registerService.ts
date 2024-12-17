@@ -1,5 +1,5 @@
-import { registerType } from "interfaces/index.js";
 import bcrypt from "bcrypt";
+import { registerType } from "../interfaces/index.js";
 import { findUser, findUserBySession } from "../repository/loginRepository.js";
 import { logUserInDb, updateUserInDb } from "../repository/registerRepository.js";
 

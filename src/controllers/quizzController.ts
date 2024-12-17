@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { QuizzType } from "../interfaces/index.js";
-import { getAllQuizzes, createQuizz, getUserQuizzes, deleteQuizzById } from "services/quizzService.js";
+import { getAllQuizzes, createQuizz, getUserQuizzes, deleteQuizzById } from "../services/quizzService.js";
 
 export const doQuizz = async (req: Request, res: Response) => {
     const quizz: QuizzType = req.body;
