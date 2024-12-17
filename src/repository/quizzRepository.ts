@@ -1,5 +1,5 @@
 import database from "../config/index.js"
-import { QuizzType } from "interfaces/index.js";
+import { QuizzType } from "../interfaces/index.js";
 
 export const saveQuizzInDb = async (quizz: QuizzType) => {
     try {
