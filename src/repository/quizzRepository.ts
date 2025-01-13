@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import database from "../config/index.js"
 import { QuizzType } from "../interfaces/index.js";
 
@@ -42,4 +43,16 @@ export const deleteQuizzInDb = async (id: string) => {
         console.log("Error trying to save quizz", error);
         throw error
     }
-}
+};
+
+export const getQuizzInDb = async (id: string) => {
+    try {
+        const db = await database;
+        const objectId = new ObjectId(id);
+        const result = await db.collection('quizz').findOne({ _id: objectId });
+        return result;
+    } catch (error) {
+        console.log("Error trying to save quizz", error);
+        throw error
+    }
+};
