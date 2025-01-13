@@ -38,7 +38,12 @@ export const getUserQuizzesFromDb = async (userId: string) => {
 export const deleteQuizzInDb = async (id: string) => {
     try {
         const db = await database;
-        await db.collection('quizz').deleteOne({ id });
+        const objectId = new ObjectId(id);
+        const result = await db.collection('quizz').deleteOne({ _id: objectId });
+
+        if (result.deletedCount === 0) {
+            throw new Error("Quizz not found or already deleted");
+        }
     } catch (error) {
         console.log("Error trying to save quizz", error);
         throw error
