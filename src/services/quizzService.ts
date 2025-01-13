@@ -1,6 +1,6 @@
 import { QuizzType } from "../interfaces/index.js";
 import { findUserBySession } from "../repository/loginRepository.js";
-import { deleteQuizzInDb, getQuizzesFromDb, getUserQuizzesFromDb, saveQuizzInDb } from "../repository/quizzRepository.js";
+import { deleteQuizzInDb, getQuizzesFromDb, getQuizzInDb, getUserQuizzesFromDb, saveQuizzInDb } from "../repository/quizzRepository.js";
 
 export const createQuizz = async (quizz: QuizzType, token: string) => {
     const session = await findUserBySession(token);
@@ -91,4 +91,20 @@ export const deleteQuizzById = async (id: string) => {
 
 
     await deleteQuizzInDb(id);
+};
+export const takeQuizzById = async (id: string) => {
+
+    if (!id) {
+        throw {
+            response: {
+                status: 404,
+                message: "Quizz does not exist!"
+            }
+        }
+    };
+
+
+    const quizz = await getQuizzInDb(id);
+
+    return quizz
 };
