@@ -89,7 +89,6 @@ export const deleteQuizzById = async (id: string) => {
         }
     };
 
-
     await deleteQuizzInDb(id);
 };
 export const takeQuizzById = async (id: string) => {
