@@ -32,12 +32,12 @@ export const deleteQuizz = async (req: Request, res: Response) => {
 
     await deleteQuizzById(id);
 
-    res.sendStatus(200);
+    res.status(200).send("Quizz was deleted successfully");
 };
 
 export const getQuizzById = async (req: Request, res: Response) => {
     const id = req.params.id;
-
+    
     const quizz = await takeQuizzById(id);
 
     res.status(200).send(quizz);
