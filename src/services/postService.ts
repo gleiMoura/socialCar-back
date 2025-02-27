@@ -13,6 +13,15 @@ export const createPost = async (caption: string, token: string, photo: string) 
         }
     };
 
+    if (!caption) {
+        throw {
+            response: {
+                status: 404,
+                message: "Caption is necessary!"
+            }
+        }
+    };
+
     const userId = session.userId;
 
     const postToCreate = {
