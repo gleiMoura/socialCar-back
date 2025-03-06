@@ -41,7 +41,9 @@ export const logUserWithProfileLink = async (token: string, profileLink: string)
     if (result) {
         return ({
             token,
-            profileLink
+            profileLink,
+            email: session.email,
+            name: session.name
         });
     };
 };
