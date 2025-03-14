@@ -23,15 +23,18 @@ const signinUser = async (credentials: loginType) => {
     try {
         const userId = user._id;
         const token = uuid();
-        await startSession(userId, token);
-        delete user.password;
 
         const userInformation = {
+            userId,
             name: user.name,
-            profileUrl: "",
+            profileUrl: user?.profileUrl || "",
             email,
             token
         };
+
+        await startSession(userInformation, token);
+        delete user.password;
+
         return userInformation;
     } catch (error) {
         console.error("Erro no servidor, " + error);
