@@ -22,7 +22,17 @@ export const logUser = async (credentials: registerType) => {
     await logUserInDb({ ...credentials, password: passwordCrypt });
 };
 
-export const logUserWithProfileLink = async (token: string, profileLink: string) => {
+export const logUserWithProfileLink = async (authHeader: string, profileLink: string) => {
+    if (!authHeader) {
+        throw {
+            response: {
+                status: 404,
+                message: "It's necessary the token"
+            }
+        }
+    }
+
+    const token = authHeader.split(' ')[1];
     const session = await findUserBySession(token);
 
     if (!session) {
@@ -36,7 +46,7 @@ export const logUserWithProfileLink = async (token: string, profileLink: string)
 
     const userId = session.userId;
 
-    const result = await updateUserInDb(userId, profileLink);
+    const result = await updateUserInDb(userId, profileLink, session.name);
 
     if (result) {
         return ({
