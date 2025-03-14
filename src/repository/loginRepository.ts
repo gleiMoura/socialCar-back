@@ -23,11 +23,11 @@ const findUserBySession = async (token: string) => {
     }
 }
 
-const startSession = async (userId: ObjectId, token: string) => {
+const startSession = async (userInformation: any, token: string) => {
     try {
         const db = await database;
         await db.collection("sessions").insertOne({
-            userId, token
+            ...userInformation, token
         })
     } catch (error) {
         console.log("Error trying start user session", error)
