@@ -1,5 +1,4 @@
 import database from "../config/index.js"
-import { ObjectId } from "mongodb";
 
 const findUser = async (email: string) => {
     try {
