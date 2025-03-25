@@ -5,8 +5,8 @@ import { createPost, getAllPosts, getUserPosts } from "../services/postService.j
 
 export const savePost = async (req: Request, res: Response) => {
     const file = req.file;
-    const caption: string = req.body.caption;
-    const authHeader = req.headers.authorization;
+    const caption: string = req.body?.caption;
+    const authHeader = req.headers?.authorization;
     const token = authHeader.split(' ')[1];
 
     const postImageLink = await generateProfileLink(file);
