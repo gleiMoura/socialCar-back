@@ -14,16 +14,21 @@ export const logUserInDb = async (credentials: registerType) => {
 export const updateUserInDb = async (userId: string, profileLink: string, name: string) => {
     try {
         const db = await database;
-        const result = await db.collection('users').updateOne(
+        const firstResult = await db.collection('users').updateOne(
             { _id: new ObjectId(userId) }, // Converte string para ObjectId
             { $set: { profileUrl: profileLink, name } }
         );
 
-        if (result.matchedCount === 0) {
+        const secondResult = await db.collection('sessions').updateOne(
+            { userId: new ObjectId(userId) }, // Converte string para ObjectId
+            { $set: { profileUrl: profileLink, name } }
+        );
+
+        if (firstResult.matchedCount === 0 || secondResult.matchedCount === 0) {
             console.warn(`No user found with id: ${userId}`);
         }
 
-        return result;
+        return { firstResult, secondResult };
     } catch (error) {
         console.error("Error updating user in db:", error);
         throw error;
