@@ -27,7 +27,9 @@ export const createPost = async (caption: string, token: string, photo: string) 
     const postToCreate = {
         userId,
         caption,
-        photo
+        photo,
+        profileUrl: session.profileUrl,
+        name: session.name
     };
 
     const result = await savePostInDb(postToCreate);
