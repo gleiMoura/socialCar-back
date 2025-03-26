@@ -30,6 +30,7 @@ const quizzSchema: ObjectSchema = joi.object({
     thirdQuestion: questionSchema.optional(),
     rightOptions: rightOptionsSchema.required(),
     answers: answersSchema.required(),
+    quizzImage: joi.string().required()
 });
 
 export default quizzSchema;
