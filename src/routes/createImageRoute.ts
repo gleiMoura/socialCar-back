@@ -1,4 +1,4 @@
-import { saveImage } from "controllers/imageController";
+import { saveImage } from "controllers/imageController.js";
 import { Router } from "express";
 import multer from "multer";
 
