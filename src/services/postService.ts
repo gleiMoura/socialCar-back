@@ -1,8 +1,9 @@
 import { getPostsFromDb, getUserPostsFromDb, savePostInDb } from "../repository/postRepository.js";
-import { findUserBySession } from "../repository/loginRepository.js";
+import { findUser, findUserBySession } from "../repository/loginRepository.js";
 
 export const createPost = async (caption: string, token: string, photo: string) => {
     const session = await findUserBySession(token);
+    const user = await findUser(session.email);
 
     if (!session) {
         throw {
@@ -28,8 +29,8 @@ export const createPost = async (caption: string, token: string, photo: string) 
         userId,
         caption,
         photo,
-        profileUrl: session.profileUrl,
-        name: session.name
+        profileUrl: user.profileUrl,
+        name: user.name
     };
 
     const result = await savePostInDb(postToCreate);

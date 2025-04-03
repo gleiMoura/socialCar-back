@@ -33,9 +33,11 @@ export const logUserWithProfileLink = async (authHeader: string, profileLink: st
     }
 
     const token = authHeader.split(' ')[1];
-    const session = await findUserBySession(token);
+    const user = await findUserBySession(token);
 
-    if (!session) {
+    console.log("session", user)
+
+    if (!user) {
         throw {
             response: {
                 status: 404,
@@ -44,16 +46,16 @@ export const logUserWithProfileLink = async (authHeader: string, profileLink: st
         }
     };
 
-    const userId = session.userId;
+    const userId = user.userId;
 
-    const result = await updateUserInDb(userId, profileLink, session.name);
+    const result = await updateUserInDb(userId, profileLink, user.name);
 
     if (result) {
         return ({
             token,
             profileLink,
-            email: session.email,
-            name: session.name
+            email: user.email,
+            name: user.name
         });
     };
 };
