@@ -1,5 +1,6 @@
 import database from "../config/index.js"
 import { PostType } from "../interfaces/index.js";
+import { ObjectId } from "mongodb";
 
 export const savePostInDb = async (post: PostType) => {
     try {
@@ -31,5 +32,22 @@ export const getUserPostsFromDb = async (userId: string) => {
     } catch (error) {
         console.log("Error trying to save quizz", error);
         throw error
+    }
+};
+
+export const deletePostInDB = async (postId: string): Promise<boolean> => {
+    try {
+        const db = await database;
+        const result = await db.collection("post").deleteOne({ _id: new ObjectId(postId) });
+
+        if (result.deletedCount === 0) {
+            console.warn(`Post with ID ${postId} not found.`);
+            return false;
+        }
+
+        return true;
+    } catch (error) {
+        console.error("Error trying to delete post:", error);
+        throw new Error("Failed to delete post");
     }
 };
