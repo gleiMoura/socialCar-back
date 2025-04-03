@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { PostType } from "../interfaces/index.js";
 import { generateProfileLink } from "../repository/filesRepository.js";
-import { createPost, getAllPosts, getUserPosts } from "../services/postService.js";
+import { createPost, deleteUserPost, getAllPosts, getUserPosts } from "../services/postService.js";
 
 export const savePost = async (req: Request, res: Response) => {
     const file = req.file;
@@ -30,3 +30,14 @@ export const sendUserPosts = async (req: Request, res: Response) => {
 
     res.send(userPosts).status(201);
 };
+
+export const deletePost = async (req: Request, res: Response) => {
+    const postId = req.params.id;
+    const authHeader = req.headers.authorization;
+    const token = authHeader.split(' ')[1];
+
+    const userPosts = await deleteUserPost(token, postId);
+
+    res.send(userPosts).status(201);
+};
+
