@@ -35,8 +35,6 @@ export const logUserWithProfileLink = async (authHeader: string, profileLink: st
     const token = authHeader.split(' ')[1];
     const user = await findUserBySession(token);
 
-    console.log("session", user)
-
     if (!user) {
         throw {
             response: {
@@ -46,9 +44,9 @@ export const logUserWithProfileLink = async (authHeader: string, profileLink: st
         }
     };
 
-    const userId = user.userId;
+    const userId = user?.userId;
 
-    const result = await updateUserInDb(userId, profileLink, user.name);
+    const result = await updateUserInDb(userId, profileLink, user.name, token);
 
     if (result) {
         return ({
