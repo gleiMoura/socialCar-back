@@ -11,27 +11,40 @@ export const logUserInDb = async (credentials: registerType) => {
     }
 };
 
-export const updateUserInDb = async (userId: string, profileLink: string, name: string) => {
+export const updateUserInDb = async (userId: ObjectId, profileLink: string, name: string, token: string) => {
     try {
         const db = await database;
-        const firstResult = await db.collection('users').updateOne(
-            { _id: new ObjectId(userId) }, // Converte string para ObjectId
-            { $set: { profileLink, name } }
-        );
 
-        const secondResult = await db.collection('sessions').updateOne(
-            { userId: new ObjectId(userId) }, // Converte string para ObjectId
-            { $set: { profileLink, name } }
-        );
+        const [userUpdate, sessionUpdate, postsUpdate] = await Promise.all([
+            db.collection('users').updateOne(
+                { _id: userId },
+                { $set: { profileLink, name } }
+            ),
+            db.collection('sessions').updateMany(
+                { token },
+                { $set: { profileLink, name } }
+            ),
+            db.collection('post').updateMany(
+                { userId },
+                { $set: { profileUrl: profileLink } }
+            ),
+        ]);
 
-        if (firstResult.matchedCount === 0 || secondResult.matchedCount === 0) {
-            console.warn(`No user found with id: ${userId}`);
+        if (userUpdate.matchedCount === 0) {
+            console.warn(`User not found with id: ${userId}`);
+        }
+        if (sessionUpdate.matchedCount === 0) {
+            console.warn(`Session not found for user id: ${userId}`);
+        }
+        if (postsUpdate.matchedCount === 0) {
+            console.warn(`Post not found for user id: ${userId}`);
         }
 
-        return { firstResult, secondResult };
+        return { userUpdate, sessionUpdate, postsUpdate };
     } catch (error) {
-        console.error("Error updating user in db:", error);
+        console.error(`Error updating user ${userId} in db:`, error);
         throw error;
     }
 };
+
 
