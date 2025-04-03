@@ -1,4 +1,4 @@
-import { getPostsFromDb, getUserPostsFromDb, savePostInDb } from "../repository/postRepository.js";
+import { deletePostInDB, getPostsFromDb, getUserPostsFromDb, savePostInDb } from "../repository/postRepository.js";
 import { findUser, findUserBySession } from "../repository/loginRepository.js";
 
 export const createPost = async (caption: string, token: string, photo: string) => {
@@ -88,4 +88,20 @@ export const getUserPosts = async (token: string) => {
     };
 
     return posts;
+};
+
+export const deleteUserPost = async (token: string, postId: string) => {
+    const session = await findUserBySession(token);
+    const user = await findUser(session.email);
+
+    if (!session || !user) {
+        throw {
+            response: {
+                status: 404,
+                message: "User is not loged in system!"
+            }
+        }
+    };
+
+    await deletePostInDB(postId)
 };
